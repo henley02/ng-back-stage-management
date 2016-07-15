@@ -1,9 +1,9 @@
-angularºóÌ¨¹ÜÀíÄ£°å
-index.html£º Èë¿Ú 
-js£º ´æ·ÅËùÓÐÒµÎñÂß¼­´úÂë 
-js/app.js£º¶¨ÒångÐèÒª¼ÓÔØµÄÄ£¿é 
-js/main.js£º¶¨ÒångµÄÈ«¾ÖÅäÖÃÐÅÏ¢ 
-js/config.router.js£ºngµÄÂ·ÓÉÆ÷ 
-tpl£º´æ·ÅËùÓÐÒ³ÃæÄ£°æ 
-tpl/blocks£ºÒ³Ãæ¿ò¼Ü£¨Í·¡¢Î²¡¢²à±ßÀ¸¡­) 
-vendor£º´æ·ÅËùÓÐµÚÈý·½Ä£¿é
+angularåŽå°ç®¡ç†æ¨¡æ¿
+index.htmlï¼š å…¥å£ 
+jsï¼š å­˜æ”¾æ‰€æœ‰ä¸šåŠ¡é€»è¾‘ä»£ç  
+js/app.jsï¼šå®šä¹‰ngéœ€è¦åŠ è½½çš„æ¨¡å— 
+js/main.jsï¼šå®šä¹‰ngçš„å…¨å±€é…ç½®ä¿¡æ¯ 
+js/config.router.jsï¼šngçš„è·¯ç”±å™¨ 
+tplï¼šå­˜æ”¾æ‰€æœ‰é¡µé¢æ¨¡ç‰ˆ 
+tpl/blocksï¼šé¡µé¢æ¡†æž¶ï¼ˆå¤´ã€å°¾ã€ä¾§è¾¹æ â€¦) 
+vendorï¼šå­˜æ”¾æ‰€æœ‰ç¬¬ä¸‰æ–¹æ¨¡å—

@@ -13,7 +13,7 @@ angular.module('app')
             // config
             $scope.app = {
                 host: "http://10.33.96.40:8000",
-                name: 'Angulr',
+                name: '微信后台管理系统',
                 version: '1.3.3',
                 // for chart colors
                 color: {
@@ -40,7 +40,7 @@ angular.module('app')
             }
 
             // save settings to local storage
-            if (angular.isDefined($localStorage.settings)) {
+/*            if (angular.isDefined($localStorage.settings)) {
                 $scope.app.settings = $localStorage.settings;
             } else {
                 $localStorage.settings = $scope.app.settings;
@@ -52,7 +52,7 @@ angular.module('app')
                 }
                 // save to local storage
                 $localStorage.settings = $scope.app.settings;
-            }, true);
+            }, true);*/
 
             // angular translate
             $scope.lang = {isopen: false};

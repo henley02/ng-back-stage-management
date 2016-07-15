@@ -3,35 +3,42 @@
  */
 app.controller('LoadingController', function ($scope, $resource, $state) {
     var $com = $resource($scope.app.host + "/auth/info/?");
-   /* $com.get(function (data) {//引入data
-        $scope.session_user = $localStorage.user = data; //保存用户信息
+    /*     $com.get(function (data) {//引入data
+     $scope.session_user = $localStorage.user = data; //保存用户信息
+     $state.go('app.dashboard');
+     })*/
+    $com.get(function () {
         $state.go('app.dashboard');
-    })*/
-    $com.get(function(){
-        $state.go('app.dashboard');
-    },function(){
+    }, function () {
         $state.go('auth.login');
     })
 });
-app.controller('LoginController', function ($scope, $state, $http, $resource, Base64, $localStorage) {
-    $scope.login = function () {
-        $scope.authError = ""
-        var authdata = Base64.encode($scope.user.username + ':' + $scope.user.password);
-        $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
-        var $com = $resource($scope.app.host + "/auth/info/?");
-        /*$com.get(function(data){      //引入data
+app.controller('LoginController', function ($scope, $state, $http, $resource, Base64, $localStorage, lyer, AuthService) {
+    $scope.login = function (data) {
+        /*       $scope.authError = ""
+         var authdata = Base64.encode($scope.user.username + ':' + $scope.user.password);
+         $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
+         var $com = $resource($scope.app.host + "/auth/info/?");
+         /!*$com.get(function(data){      //引入data
          $scope.session_user = $localStorage.user = data; //保存用户信息
          $localStorage.auth = authdata;
          $state.go('app.dashboard');
          },function(){
          $scope.authError = "服务器登录错误"
-         })*/
-        if ($scope.user.username == 'admin' && $scope.user.password == '1234') {
-            $localStorage.auth = authdata;
-            $state.go('app.dashboard');
-        } else {
-            $scope.authError = "服务器登录错误"
-        }
+         })*!/
+         if ($scope.user.username == 'admin' && $scope.user.password == '1234') {
+         $localStorage.auth = authdata;
+         $state.go('app.dashboard');
+         } else {
+         lyer.msg("服务器登录错误");
+         $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+         $scope.authError = "服务器登录错误"
+         }*/
+        AuthService.login($scope.user.username, $scope.user.password).then(function (authenticated) {
+            $state.go('app.dashboard', {}, {reload: true});
+        }, function (err) {
+            lyer.msg("服务器登录错误");
+        });
     }
 });
 app.factory('Base64', function () {
@@ -113,4 +120,46 @@ app.factory('Base64', function () {
             return output;
         }
     };
-})
+});//弹窗
+app.factory('lyer', [function () {
+    // return function(msg){
+    var msg = function (msg, callback) {
+        layer.open({
+            content: msg,
+            btn: ['确认'],
+            yes: function (index) {
+                layer.close(index);
+                if (callback) {
+                    callback(index);
+                }
+            }
+
+        });
+    }
+
+    var confirm = function (msg, yesCallback, noCallback, yesTitle, noTitle) {
+        layer.open({
+            title: '温馨提示',
+            content: msg,
+            btn: [yesTitle || '确认', noTitle || '取消'],
+            yes: function (index) {
+                if (yesCallback) {
+                    yesCallback()
+                }
+                layer.close(index);
+            },
+            no: function (index) {
+                if (noCallback) {
+                    noCallback();
+                }
+                layer.close(index);
+            }
+        })
+    }
+
+    return {
+        msg: msg,
+        confirm: confirm
+    }
+    // };
+}])
